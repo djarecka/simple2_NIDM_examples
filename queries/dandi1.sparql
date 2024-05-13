@@ -1,0 +1,15 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dandi: <http://schema.dandiarchive.org/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX schema: <http://schema.org/>
+SELECT DISTINCT ?sub_id ?d ?gen ?spc ?age
+WHERE {
+    ?asset rdf:type dandi:Asset .
+    ?d prov:hasMember ?asset .
+    ?asset prov:wasAttributedTo ?sub .
+    ?sub rdf:type dandi:Participant ;
+          dandi:genotype ?gen ;
+          schema:identifier ?sub_id ;
+          dandi:species / schema:name ?spc ;
+          dandi:age / schema:value ?age .
+}
